@@ -11,7 +11,7 @@ const Login = ({navigation}) => {
     console.log("Email:", email);
     console.log("Password:", password);
 
-    // Contoh navigasi (bisa disesuaikan dengan rute Anda)
+    
     navigation.navigate("Tabs");
   }
 
