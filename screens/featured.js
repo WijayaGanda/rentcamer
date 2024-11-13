@@ -1,12 +1,12 @@
 import React from "react";
 import { Center, Text } from "native-base";
 
-const AboutUs = () => {
+const Featured = () => {
   return (
     <Center flex={1}>
-      <Text fontSize="xl">Welcome to Home Page!</Text>
+      <Text fontSize="xl">Welcome to Featured</Text>
     </Center>
   );
 };
 
-export default AboutUs;
+export default Featured;
