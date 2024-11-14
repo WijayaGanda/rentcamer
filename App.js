@@ -9,6 +9,7 @@ import Register from "./screens/register";
 import Equipment from "./screens/equipment";
 import AboutUs from "./screens/aboutus";
 import Featured from "./screens/featured";
+import Detail from "./screens/detail";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Stack = createNativeStackNavigator();
@@ -74,6 +75,7 @@ const App = () => {
           <Stack.Screen name="Login" component={Login} options={noHead} />
           <Stack.Screen name="Tabs" component={Tabs} options={noHead} />
           <Stack.Screen name="Register" component={Register} options={noHead} />
+          <Stack.Screen name="Detail" component={Detail} options={noHead} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
