@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Center, Text, Image, VStack, Divider, HStack, FlatList, Button, Heading, Spacer } from "native-base";
+import { Box, Center, Text, Image, VStack, Divider, HStack, FlatList, Button, Heading, Spacer, ScrollView } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { Header } from "../components";
 import { datas, categoryBrands, getBrandInfo } from "../datas";
@@ -77,8 +77,9 @@ const Home = () => {
                   key={index}
                   onPress={() => navigation.navigate("Equipment", { item: item })}
                 >
+                  <ScrollView>
                   <Box padding={2}>
-                    <Box backgroundColor={"white"} borderRadius={10} width="240px" height="350">
+                    <Box backgroundColor={"white"} borderRadius={10} width="240px" height="400px">
                       <Image mb={6} borderTopRadius={10} source={require("../assets/camera.jpeg")} alt="camera" width="240px" height="200px" resizeMode="cover" />
                       <Center>
                         <Heading>{item.name}</Heading>
@@ -86,6 +87,7 @@ const Home = () => {
                       </Center>
                     </Box>
                   </Box>
+                  </ScrollView>
                 </TouchableOpacity>
               )}
             />

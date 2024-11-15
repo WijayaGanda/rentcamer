@@ -43,7 +43,7 @@ const FeaturedCategory = () => {
                     borderRadius={10}
                     shadow="2"
                     width="100%"
-                    height="200px"
+                    height="250px"
                   >
                     {/* <Image
                       source={{ uri: item.imageUrl }}
