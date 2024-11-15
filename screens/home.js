@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Center, Text, Image, VStack, Divider, HStack, FlatList, Button, Heading, Spacer } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { Header } from "../components";
-import datas from "../datas";
+import { datas, categoryBrands, getBrandInfo } from "../datas";
 import { TouchableOpacity } from "react-native";
 
 const Home = () => {
@@ -41,24 +41,24 @@ const Home = () => {
               <Text fontSize={16} color={"blue.600"}>All</Text>
             </HStack>
             <FlatList
-              data={datas}
+              data={categoryBrands}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
-              renderItem={({ item, index }) => (
+              renderItem={({ item }) => (
                 <TouchableOpacity
                   activeOpacity={0.5}
-                  key={index}
-                  onPress={() => navigation.navigate("Equipment", { item: item })}
+                  onPress={() => navigation.navigate("Home", { brand: item.name })}
                 >
                   <Box padding={1} py={6}>
                     <Box backgroundColor={"white"} width="95px" height="40px" borderRadius={6}>
                       <Center flex={1}>
-                        <Text textAlign={"center"}>{item.category_name}</Text>
+                        <Image source={item.image} alt={item.name} resizeMode="contain" />
                       </Center>
                     </Box>
                   </Box>
                 </TouchableOpacity>
               )}
+              keyExtractor={(item) => item.id.toString()}
             />
           </Box>
 

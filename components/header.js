@@ -20,7 +20,7 @@ const Header = ({ title, withBack = false }) => {
                                 source={require("../assets/logo.png")}
                                 w="12"
                                 h="12"
-                                alt="CNN Logo"
+                                alt="logo"
                                 mr={"3"}
                             />
                         </>
