@@ -10,6 +10,7 @@ import Equipment from "./screens/equipment";
 import AboutUs from "./screens/aboutus";
 import Featured from "./screens/featured";
 import Detail from "./screens/detail";
+import DetailItem from "./screens/detail-item";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Stack = createNativeStackNavigator();
@@ -76,6 +77,7 @@ const App = () => {
           <Stack.Screen name="Tabs" component={Tabs} options={noHead} />
           <Stack.Screen name="Register" component={Register} options={noHead} />
           <Stack.Screen name="Detail" component={Detail} options={noHead} />
+          <Stack.Screen name="DetailItem" component={DetailItem} options={noHead} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

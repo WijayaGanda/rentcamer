@@ -3,7 +3,7 @@ import { Box, Center, Text, Image, VStack, Divider, HStack, FlatList, Button, He
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native";
 import { Header } from "../components";
-import datas from "../datas";
+import { datas, categoryBrands, getBrandInfo } from "../datas";
 
 const FeaturedCategory = () => {
   const navigation = useNavigation();
