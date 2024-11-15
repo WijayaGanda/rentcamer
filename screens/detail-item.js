@@ -67,7 +67,7 @@ return (
                 mt="6"
                 bg="violet.800"
                 _text={{ color: "white", fontWeight: "bold" }}
-                onPress={() => navigation.navigate('EquipmentNew')}
+                onPress={() => navigation.navigate('Booking')}
                 >
                 Checkout
             </Button>

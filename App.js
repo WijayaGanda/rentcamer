@@ -11,12 +11,13 @@ import AboutUs from "./screens/aboutus";
 import Featured from "./screens/featured";
 import Detail from "./screens/detail";
 import DetailItem from "./screens/detail-item";
+import Booking from "./screens/booking";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const noHead = { headerShown: false }
+const noHead = { headerShown: false };
 
 const Tabs = () => {
   return (
@@ -37,6 +38,8 @@ const Tabs = () => {
             case "About Us":
               iconName = "person-circle-outline";
               break;
+            default:
+              iconName = "home-outline"; // fallback icon
           }
           return (
             <Ionicons
@@ -53,7 +56,7 @@ const Tabs = () => {
         },
         tabBarLabel: ({ children, color, focused }) => {
           return (
-            <Text color={focused ? "" : color} mb={2}>
+            <Text color={focused ? "blue" : color} mb={2}>
               {children}
             </Text>
           );
@@ -65,8 +68,8 @@ const Tabs = () => {
       <Tab.Screen name="Featured" component={Featured} options={noHead} />
       <Tab.Screen name="About Us" component={AboutUs} options={noHead} />
     </Tab.Navigator>
-  )
-}
+  );
+};
 
 const App = () => {
   return (
@@ -78,6 +81,7 @@ const App = () => {
           <Stack.Screen name="Register" component={Register} options={noHead} />
           <Stack.Screen name="Detail" component={Detail} options={noHead} />
           <Stack.Screen name="DetailItem" component={DetailItem} options={noHead} />
+          <Stack.Screen name="Booking" component={Booking} options={noHead} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
