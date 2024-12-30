@@ -91,7 +91,7 @@ const AboutUs = () => {
                 borderRadius={100}
               />
               <VStack>
-                <Text fontWeight="bold">Athalla</Text>
+                <Text fontWeight="bold">Athallah</Text>
                 <Text color="gray.500">Chief Technology Officer</Text>
               </VStack>
             </HStack>

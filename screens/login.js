@@ -10,10 +10,16 @@ const Login = ({navigation}) => {
   const handleLogin = () => {
     console.log("Email:", email);
     console.log("Password:", password);
-
-    
-    navigation.navigate("Tabs");
-  }
+  
+    if (email === "admin@example.com" && password === "admin123") {
+      // Redirect to Admin Dashboard for admin users
+      navigation.navigate("AdminDashboard");
+    } else {
+      // Redirect to Tabs for regular users
+      navigation.navigate("Tabs");
+    }
+  };
+  
 
   return (
     <ScrollView flex={1} bg="#F3F4F6">
