@@ -18,28 +18,22 @@ const Equipment = () => {
   const navigation = useNavigation();
 
   return (
-    <Box flex={1} bg="#F9F9F9">
+    <Box flex={1} bg="">
       <Header title={"Equipment"} />
       <FlatList
-        ListHeaderComponent={() => (
-          <>
-            <Center>
-              <Box
-                px={5}
-                pt={3}
-                backgroundColor={"black"}
-                width="100%"
-                height="200"
-              >
+            ListHeaderComponent={() => (
+             <> 
                 <Center>
-                  <Image
-                    source={require("../assets/camera.jpeg")}
-                    alt="Equipment"
-                    resizeMode="contain"
-                  />
+                  <Box mt={4} px={5} shadow="" backgroundColor={"black"} borderRadius="10" width="90%">
+                    <Center>
+                      <Image
+                        source={require("../assets/camera.jpeg")}
+                        alt="Featured"
+                        resizeMode="contain"
+                      />
+                    </Center>
+                  </Box>
                 </Center>
-              </Box>
-            </Center>
 
             <Box p={5}>
               <HStack justifyContent={"space-between"} alignItems={"center"}>

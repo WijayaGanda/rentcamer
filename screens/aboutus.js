@@ -10,22 +10,13 @@ const AboutUs = () => {
     <ScrollView flex={1} backgroundColor="white">
       <Header title="About Us" />
       <Center mt={4} px={3}>
-          <Center>
+          
             <Box mt={4} px={50} mb={4} shadow="4" backgroundColor={"black"} borderRadius="20" width="90%">
               <Center>
                 <Image source={require("../assets/camera.jpeg")} alt="camera" resizeMode="contain" />
               </Center>
             </Box>
-          </Center>
-        {/* Company Logo */}
-        {/* <Image
-          source={require("../assets/camera.jpeg")}
-          // alt="Company Logo"
-          size="xl"
-          resizeMode="contain"
-          mb={4}
-        /> */}
-
+            
         {/* About Us Section */}
         <VStack space={4} alignItems="justify" w="90%">
           <Text fontWeight="bold" fontSize="lg" textAlign="center">
