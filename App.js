@@ -12,6 +12,7 @@ import Featured from "./screens/featured";
 import Detail from "./screens/detail-featured";
 import DetailItem from "./screens/detail-item";
 import Booking from "./screens/booking";
+import AdminNavigation from "./screens/admin-navigation";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Stack = createNativeStackNavigator();
@@ -85,6 +86,7 @@ const App = () => {
           <Stack.Screen name="Detail" component={Detail} options={noHead} />
           <Stack.Screen name="DetailItem" component={DetailItem} options={noHead} />
           <Stack.Screen name="Booking" component={Booking} options={noHead} />
+          <Stack.Screen name="AdminDashboard" component={AdminNavigation} options={noHead} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

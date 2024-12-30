@@ -7,7 +7,6 @@ import {
     Button,
     VStack,
     Divider,
-    Pressable,
 } from "native-base";
 import { Header } from "../components";
 import { datas } from "../datas";
@@ -67,7 +66,7 @@ return (
                 mt="6"
                 bg="violet.800"
                 _text={{ color: "white", fontWeight: "bold" }}
-                onPress={() => navigation.navigate('Booking')}
+                onPress={() => navigation.navigate('Booking', {itemId: item.id,})}
                 >
                 Checkout
             </Button>
