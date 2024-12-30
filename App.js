@@ -9,7 +9,7 @@ import Register from "./screens/register";
 import Equipment from "./screens/equipment";
 import AboutUs from "./screens/aboutus";
 import Featured from "./screens/featured";
-import Detail from "./screens/detail-featured";
+import Detail from "./screens/detail";
 import DetailItem from "./screens/detail-item";
 import Booking from "./screens/booking";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';

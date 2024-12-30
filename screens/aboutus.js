@@ -7,10 +7,11 @@ const AboutUs = () => {
   const navigation = useNavigation();
 
   return (
-    <ScrollView flex={1} backgroundColor="">
+    <ScrollView flex={1} backgroundColor="white">
       <Header title="About Us" />
-         <Center>
-            <Box mt={4} px={5} mb={4} shadow="4" backgroundColor={"black"} borderRadius="10" width="90%">
+      <Center mt={4} px={3}>
+          
+            <Box mt={4} px={50} mb={4} shadow="4" backgroundColor={"black"} borderRadius="20" width="90%">
               <Center>
                 <Image source={require("../assets/camera.jpeg")} alt="camera" resizeMode="contain" />
               </Center>
@@ -69,7 +70,7 @@ const AboutUs = () => {
                 borderRadius={100}
               />
               <VStack>
-                <Text fontWeight="bold">Wijaya Ganda Prasetyo</Text>
+                <Text fontWeight="bold">Wijaya Ganda</Text>
                 <Text color="gray.500">Founder</Text>
               </VStack>
             </HStack>
@@ -81,8 +82,8 @@ const AboutUs = () => {
                 borderRadius={100}
               />
               <VStack>
-                <Text fontWeight="bold">Athalla Naufal Zuhdi</Text>
-                <Text color="gray.500">Founder</Text>
+                <Text fontWeight="bold">Athalla</Text>
+                <Text color="gray.500">Chief Technology Officer</Text>
               </VStack>
             </HStack>
             <HStack space={4} alignItems="center">
@@ -93,8 +94,8 @@ const AboutUs = () => {
                 borderRadius={100}
               />
               <VStack>
-                <Text fontWeight="bold">xXx</Text>
-                <Text color="gray.500">xXx</Text>
+                <Text fontWeight="bold">Jane Smith</Text>
+                <Text color="gray.500">Chief Administrator</Text>
               </VStack>
             </HStack>
           </VStack>
