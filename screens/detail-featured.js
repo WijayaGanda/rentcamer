@@ -17,6 +17,7 @@ const Detail = () => {
             />
           </Box>
           </Center>
+          
           <Center>
           <Heading>Cinema Set</Heading>
           <Text>By Sony</Text>
