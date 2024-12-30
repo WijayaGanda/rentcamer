@@ -9,21 +9,17 @@ const FeaturedCategory = () => {
   const navigation = useNavigation();
 
   return (
-    <FlatList
-      ListHeaderComponent={() => (
-        <>
-          <Header title={"Featured"} />
-          <Center>
-            <Box mt={4} px={5} shadow="" backgroundColor={"black"} borderRadius="10" width="90%">
+     <FlatList
+          ListHeaderComponent={() => (
+            <>
+              <Header title={"Featured"} />
               <Center>
-                <Image
-                  source={require("../assets/camera.jpeg")}
-                  alt="Featured"
-                  resizeMode="contain"
-                />
+                <Box mt={4} px={5} shadow="4" backgroundColor={"black"} borderRadius="10" width="90%">
+                  <Center>
+                    <Image source={require("../assets/camera.jpeg")} alt="camera" resizeMode="contain" />
+                  </Center>
+                </Box>
               </Center>
-            </Box>
-          </Center>
 
           {/* Featured Categories Section */}
           <Box p={5}>
