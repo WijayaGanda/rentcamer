@@ -8,7 +8,7 @@ const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false); // Status loading untuk tombol login
-
+  
   // Fungsi login dengan email dan password
   const handleEmailLogin = async () => {
     setLoading(true); // Mulai loading
@@ -16,7 +16,7 @@ const Login = ({ navigation }) => {
       await signInWithEmailAndPassword(auth, email, password); // Menggunakan API modular
       if (email === "admin@example.com" && password === "Admin123") {
         console.log("Admin logged in!");
-        navigation.navigate("Admin"); // Arahkan ke halaman admin jika admin login
+        navigation.navigate("AdminDashboard"); // Arahkan ke halaman admin jika admin login
       } else {
         console.log("User logged in!");
         navigation.navigate("Tabs"); // Arahkan ke halaman Tabs jika pengguna biasa
