@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NativeBaseProvider, Text, View } from "native-base";
+import { NativeBaseProvider, Text } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Login from './screens/login';
 import Home from "./screens/home";
@@ -39,8 +39,6 @@ const Tabs = () => {
             case "About Us":
               iconName = "person-circle-outline";
               break;
-            default:
-              iconName = "home-outline"; // fallback icon
           }
           return (
             <Ionicons
@@ -57,7 +55,7 @@ const Tabs = () => {
         },
         tabBarLabel: ({ children, color, focused }) => {
           return (
-            <Text color={focused ? "blue" : color} mb={2}>
+            <Text color={focused ? "" : color} mb={2}>
               {children}
             </Text>
           );
@@ -69,14 +67,19 @@ const Tabs = () => {
       <Tab.Screen name="Featured" component={Featured} options={noHead} />
       <Tab.Screen name="About Us" component={AboutUs} options={noHead} />
     </Tab.Navigator>
-  );
-};
+  )
+}
 
 const App = () => {
+  useEffect(() => {
+    // Logik tambahan jika diperlukan pada aplikasi startup
+    console.log("App initialized");
+  }, []);
+
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='Login'>
+        <Stack.Navigator initialRouteName="Login">
           <Stack.Screen name="Login" component={Login} options={noHead} />
           <Stack.Screen name="Tabs" component={Tabs} options={noHead} />
           <Stack.Screen name="Register" component={Register} options={noHead} />

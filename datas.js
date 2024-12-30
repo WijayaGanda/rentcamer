@@ -301,9 +301,44 @@ const datas = [
     },
 ];
 
+const featured = [
+    {
+        id: 1,
+        category_id: 1,
+        name: "Travelling" ,
+        description : "Kamera lensa foto, flash & continuous lighting support, studio equipment, background, modifier dan lainnya ada disini",
+        image : require("./assets/CanonM50.webp"),
+        content : content,
+    },
+    {
+        id: 2,
+        category_id: 2,
+        name: "Multimedia" ,
+        description : "Kamera lensa foto, flash & continuous lighting support, studio equipment, background, modifier dan lainnya ada disini",
+        image : require("./assets/SonyA6700.webp"),
+        content : content,
+    },
+    {
+        id: 3,
+        category_id: 3,
+        name: "Photographer" ,
+        description : "Kamera lensa foto, flash & continuous lighting support, studio equipment, background, modifier dan lainnya ada disini",
+        image : require("./assets/SonyA6400.webp"),
+        content : content,
+    },
+    {
+        id: 4,
+        category_id: 4,
+        name: "CINEMA",
+        description: "Kamera lensa sinema, video support, monitor, follow focus, stabilizer, tripod dan lainnya ada disini",
+        image : require("./assets/SonyA5100.webp"),
+        content : content,
+    }
+];
+
 export const getBrandInfo = (categoryId) => {
     const brand = categoryBrands.find(item => item.id === categoryId);
     return brand || {};
 };  
 
-export {datas, categoryBrands};
+export {datas, categoryBrands, featured};
