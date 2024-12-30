@@ -1,91 +1,162 @@
 import React, { useState } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, Platform } from "react-native";
 import {
     Box,
     Text,
+    Image,
     Button,
     VStack,
     Divider,
-    Item,
-    Label,
-    DatePicker,
+    Radio,
+    FormControl,
 } from "native-base";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { Header } from "../components";
+import { datas } from "../datas"; // Pastikan file ini benar-benar ada
 
-const Booking = ({ navigation }) => {
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
-    const [totalCost, setTotalCost] = useState(0);
+const Booking = ({ route, navigation }) => {
+    const { itemId } = route.params;
+    const item = datas.find((data) => data.id === itemId);
 
-    const calculateCost = () => {
-        if (startDate && endDate) {
-            // Calculate the number of days between startDate and endDate
-            const days = (new Date(endDate) - new Date(startDate)) / (1000 * 3600 * 24);
-            if (days < 0) {
-                alert("Tanggal selesai tidak boleh sebelum tanggal mulai");
-                setTotalCost(0);
-            } else {
-                setTotalCost(days * 350000); // Rp 350.000 per day
-            }
+    const [duration, setDuration] = useState("6h"); // Default durasi
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+    const [totalDays, setTotalDays] = useState(1); // Default hari
+    const [totalPrice, setTotalPrice] = useState(item.price_6h); // Harga default
+    const [showStartPicker, setShowStartPicker] = useState(false);
+
+    const handleDurationChange = (value) => {
+        setDuration(value);
+        const selectedDate = new Date(startDate);
+
+        switch (value) {
+            case "6h":
+                setEndDate(selectedDate); // Tanggal selesai sama
+                setTotalDays(1);
+                setTotalPrice(item.price_6h);
+                break;
+            case "12h":
+                setEndDate(selectedDate); // Tanggal selesai sama
+                setTotalDays(1);
+                setTotalPrice(item.price_12h);
+                break;
+            case "24h":
+                selectedDate.setDate(selectedDate.getDate() + 1);
+                setEndDate(selectedDate); // Tanggal selesai 1 hari setelahnya
+                setTotalDays(1);
+                setTotalPrice(item.price_24h);
+                break;
+            default:
+                const days = parseInt(value.replace("d", "")); // Ambil jumlah hari
+                selectedDate.setDate(selectedDate.getDate() + days);
+                setEndDate(selectedDate); // Tambahkan jumlah hari ke tanggal selesai
+                setTotalDays(days);
+                setTotalPrice(days * item.price_24h);
+                break;
         }
+    };
+
+    const handleBooking = () => {
+        console.log({
+            itemId: item.id,
+            name: item.name,
+            startDate: startDate.toDateString(),
+            endDate: endDate.toDateString(),
+            totalDays,
+            totalPrice,
+        });
+        alert(`Booking berhasil!\nTotal harga: Rp ${totalPrice}`);
     };
 
     return (
         <Box flex={1} bg="#F9F9F9">
-            <Header title="Booking" withBack={true} />
+            <Header title="Booking Now" withBack={true} />
             <ScrollView>
                 <Box safeArea p="4" bg="#F9F9F9">
+                    <Box alignItems="center">
+                        <Image
+                            source={item.image}
+                            alt="Item Image"
+                            size="2xl"
+                            borderRadius="lg"
+                        />
+                    </Box>
+
                     <VStack space={4} mt="4" px="4">
                         <Text fontSize="xl" fontWeight="bold">
-                            Pilih Tanggal Sewa
+                            {item.name}
+                        </Text>
+                        <Text fontSize="md" color="coolGray.500">
+                            {item.brand}
                         </Text>
 
-                        <Item stackedLabel>
-                            <Label>Tanggal Mulai</Label>
-                            <DatePicker
-                                date={startDate}
-                                onDateChange={setStartDate}
-                            />
-                        </Item>
+                        <Divider my="2" />
 
-                        <Item stackedLabel>
-                            <Label>Tanggal Selesai</Label>
-                            <DatePicker
-                                date={endDate}
-                                onDateChange={setEndDate}
-                            />
-                        </Item>
+                        <Text fontSize="lg" fontWeight="bold">
+                            Pilih Durasi:
+                        </Text>
+                        <Radio.Group
+                            name="durationGroup"
+                            value={duration}
+                            onChange={(value) => handleDurationChange(value)}
+                        >
+                            <Radio value="6h" my={1}>
+                                6 Jam
+                            </Radio>
+                            <Radio value="12h" my={1}>
+                                12 Jam
+                            </Radio>
+                            <Radio value="24h" my={1}>
+                                24 Jam
+                            </Radio>
+                            <Radio value="2d" my={1}>
+                                2 Hari
+                            </Radio>
+                            <Radio value="3d" my={1}>
+                                3 Hari
+                            </Radio>
+                        </Radio.Group>
 
                         <Divider my="2" />
 
-                        {/* Display total cost */}
-                        {totalCost > 0 && (
-                            <Text fontSize="lg" fontWeight="bold">
-                                Total Biaya: Rp {totalCost}
-                            </Text>
-                        )}
+                        <Text fontSize="lg" fontWeight="bold">
+                            Pilih Tanggal Mulai:
+                        </Text>
+                        <FormControl>
+                            <Button
+                                onPress={() => setShowStartPicker(true)}
+                                bg="gray.100"
+                                _text={{ color: "black" }}
+                            >
+                                {startDate.toDateString()}
+                            </Button>
+                            {showStartPicker && (
+                                <DateTimePicker
+                                    value={startDate}
+                                    mode="date"
+                                    display={Platform.OS === "ios" ? "spinner" : "default"}
+                                    onChange={(event, date) => {
+                                        setShowStartPicker(false);
+                                        if (date) setStartDate(date);
+                                    }}
+                                />
+                            )}
+                        </FormControl>
 
                         <Divider my="2" />
 
-                        {/* Calculate Button */}
-                        <Button
-                            mt="4"
-                            bg="violet.800"
-                            _text={{ color: "white", fontWeight: "bold" }}
-                            onPress={calculateCost}
-                            disabled={!startDate || !endDate}
-                        >
-                            Hitung Biaya
-                        </Button>
+                        <Text fontSize="lg" fontWeight="bold">
+                            Ringkasan:
+                        </Text>
+                        <Text fontSize="md">Tanggal Mulai: {startDate.toDateString()}</Text>
+                        <Text fontSize="md">Tanggal Selesai: {endDate.toDateString()}</Text>
+                        <Text fontSize="md">Total Hari: {totalDays}</Text>
+                        <Text fontSize="md" fontWeight="bold">
+                            Total Harga: Rp {totalPrice}
+                        </Text>
 
-                        {/* Close Button */}
-                        <Button
-                            mt="6"
-                            bg="red.600"
-                            _text={{ color: "white" }}
-                            onPress={() => navigation.goBack()}
-                        >
-                            Kembali
+                        <Button mt="4" bg="green.600" _text={{ color: "white" }} onPress={handleBooking}>
+                            Cetak Booking
                         </Button>
                     </VStack>
                 </Box>
