@@ -1,9 +1,9 @@
 import React from "react";
-import { Box, Center, Text, Image, VStack, Divider, HStack, FlatList, Button, Heading, Spacer } from "native-base";
+import { Box, Center, Text, Image, VStack, HStack, FlatList, Heading } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native";
 import { Header } from "../components";
-import { datas, categoryBrands, getBrandInfo } from "../datas";
+import { featured } from "../datas"; // Import `featured` data
 
 const FeaturedCategory = () => {
   const navigation = useNavigation();
@@ -16,7 +16,11 @@ const FeaturedCategory = () => {
           <Center>
             <Box mt={4} px={5} shadow="" backgroundColor={"black"} borderRadius="10" width="90%">
               <Center>
-                <Image source={require("../assets/camera.jpeg")} alt="Featured" resizeMode="contain" />
+                <Image
+                  source={require("../assets/camera.jpeg")}
+                  alt="Featured"
+                  resizeMode="contain"
+                />
               </Center>
             </Box>
           </Center>
@@ -29,8 +33,8 @@ const FeaturedCategory = () => {
 
             {/* Grid Layout for Featured Categories */}
             <FlatList
-              data={datas}
-              numColumns={1}
+              data={featured} // Use `featured` data
+              numColumns={2} // Set 2 columns per row
               keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => (
                 <TouchableOpacity
@@ -43,28 +47,41 @@ const FeaturedCategory = () => {
                     borderRadius={10}
                     shadow="2"
                     width="100%"
-                    height="250px"
+                    height="220px"
+                    flex={1} // Allow flexible width
+                    padding={3} // Add padding for better spacing
                   >
-                    {/* <Image
-                      source={{ uri: item.imageUrl }}
-                      alt={item.category_name}
-                      width="10%"
-                      height="120px"
-                      borderTopRadius={10}
-                      resizeMode="cover"
-                    /> */}
-
                     <Box>
-                      <Image mb={2} borderTopRadius={10} source={require("../assets/camera.jpeg")} alt="" width="100%" height="120px" resizeMode="cover" />
+                      <Image
+                        mb={2}
+                        borderTopRadius={10}
+                        source={item.image} // Use dynamic image from `item`
+                        alt={item.name}
+                        width="100%"
+                        height="100px"
+                        resizeMode="cover"
+                      />
                       <Center>
-                        <Heading>{item.name}</Heading>
-                        <Text textAlign={"justify"}>{item.content}</Text>
+                        <Heading size="sm" numberOfLines={1} isTruncated>
+                          {item.name}
+                        </Heading>
+                        <Text
+                          textAlign={"center"}
+                          fontSize="sm"
+                          numberOfLines={2}
+                          isTruncated // Ensure text is truncated with "..."
+                        >
+                          {item.description} {/* Use `description` from `featured` */}
+                        </Text>
                       </Center>
-                  </Box>
+                    </Box>
                   </Box>
                 </TouchableOpacity>
               )}
               showsVerticalScrollIndicator={false}
+              columnWrapperStyle={{
+                justifyContent: "space-between", // Space between columns
+              }}
             />
           </Box>
         </>
