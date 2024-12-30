@@ -336,14 +336,6 @@ const featured = [
     }
 ];
 
-const detailfeatured =
-    {
-        id : 4, 
-        category_featured : "Cinema",
-        product_info : "KAMERA",
-        image : require("./assets/SonyA5100.webp"),
-        content : content,
-    }
 export const getBrandInfo = (categoryId) => {
     const brand = categoryBrands.find(item => item.id === categoryId);
     return brand || {};
