@@ -73,7 +73,7 @@ const Equipment = () => {
           >
             <Box padding={2} width="100%">
               <Center>
-                <Box backgroundColor={"white"} borderRadius={10} width="190" height="230">
+                <Box backgroundColor={"white"} borderRadius={10} width="180" height="230">
                   <VStack space={2} alignItems="center">
                     <Image
                       my={3}

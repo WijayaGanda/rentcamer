@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, VStack, HStack, Button, FlatList, Text, IconButton, Icon, Image } from "native-base";
+import { Box, VStack, HStack, Button, FlatList, Text, IconButton, Icon, Image, Divider, Spacer } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import { supabase } from "../../src/supabase"; // Impor client Supabase (tetap ada)
 import { database } from "../../firebase"; // Impor Firebase Database
@@ -50,9 +50,18 @@ const Dashboard = ({ navigation }) => {
         fetchDataPaket();
     }, []);
 
-    const handleDelete = async (id) => {
+    const handleDeleteItems = async (id) => {
         try {
             const itemRef = ref(database, `items/${id}`); // Referensi ke item berdasarkan ID
+            await remove(itemRef); // Hapus item
+            console.log(`Item dengan ID ${id} berhasil dihapus.`);
+        } catch (error) {
+            console.error(`Gagal menghapus item dengan ID ${id}:`, error);
+        }
+    };
+    const handleDeletePaket = async (id) => {
+        try {
+            const itemRef = ref(database, `paket/${id}`); // Referensi ke item berdasarkan ID
             await remove(itemRef); // Hapus item
             console.log(`Item dengan ID ${id} berhasil dihapus.`);
         } catch (error) {
@@ -117,12 +126,15 @@ const Dashboard = ({ navigation }) => {
                             />
                             <IconButton
                                 icon={<Icon as={MaterialIcons} name="delete" color="red.500" />}
-                                onPress={() => handleDelete(item.id)}
+                                onPress={() => handleDeleteItems(item.id)}
                             />
                         </HStack>
                     </Box>
                 )}
             />
+            <Spacer />
+            <Divider />
+            <Spacer />
             <FlatList
                 data={paketItems}
                 keyExtractor={(item) => item.id}
@@ -160,7 +172,7 @@ const Dashboard = ({ navigation }) => {
                             />
                             <IconButton
                                 icon={<Icon as={MaterialIcons} name="delete" color="red.500" />}
-                                onPress={() => handleDelete(item.id)}
+                                onPress={() => handleDeletePaket(item.id)}
                             />
                         </HStack>
                     </Box>

@@ -1,25 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Center, Text, Image, VStack, Divider, HStack, FlatList, Button, Heading, Spacer, ScrollView } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { Header } from "../components";
 import { datas, categoryBrands, getBrandInfo } from "../datas";
 import { TouchableOpacity } from "react-native";
+import { database } from "../firebase";
+import { ref, onValue } from "firebase/database";
 
 const Home = () => {
   const navigation = useNavigation();
+  const [items, setItems] = useState([]);
 
-  const renderitem = ({ item }) => {
-    return (
-      <TouchableOpacity
-        activeOpacity={0.5}
-        onPress={() => navigation.navigate("Equipment", { item: item })}
-      >
-        <Box p={"10"} flexDirection="row">
-          <Text>{item.brand}</Text>
-        </Box>
-      </TouchableOpacity>
-    );
-  };
+  useEffect(() => {
+    const itemsRef = ref(database, "items");
+    const unsubscribe = onValue(itemsRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const formattedData = Object.keys(data).map((key) => ({
+          id: key,
+          ...data[key],
+        }));
+        setItems(formattedData);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <FlatList
@@ -68,31 +74,33 @@ const Home = () => {
               <Text fontWeight={"bold"} fontSize={16}>Recommendation</Text>
             </HStack>
             <FlatList
-              data={datas}
+              data={items}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
-              renderItem={({ item, index }) => (
+              renderItem={({ item }) => (
                 <TouchableOpacity
-                  activeOpacity={0.5}
-                  key={index}
-                  onPress={() => navigation.navigate("Equipment", { item: item })}
+                  activeOpacity={0.7}
+                  onPress={() => navigation.navigate("DetailItem", { itemId: item.id })}
                 >
                   <ScrollView>
-                  <Box padding={2}>
-                    <Box backgroundColor={"white"} borderRadius={10} width="240px" height="400px">
-                      <Image mb={6} borderTopRadius={10} source={item.image} alt="camera" width="240px" height="200px" resizeMode="cover" />
-                      <Center>
-                        <Heading>{item.name}</Heading>
-                        <Text textAlign={"justify"}>{item.brand}</Text>
-                      </Center>
+                    <Box padding={2}>
+                      <Box backgroundColor={"white"} borderRadius={10} width="240px" height="400px">
+                        <Image mb={6} borderTopRadius={10} source={{ uri: item.imageUrl }} alt="camera" width="240px" height="200px" resizeMode="cover" />
+                        <Center>
+                          <Heading>{item.name}</Heading>
+                          <Text textAlign={"justify"}>{item.brand}</Text>
+                          <Text bold italic underline>
+                            Start from Rp.{item.price6h}
+                          </Text>
+                        </Center>
+                      </Box>
                     </Box>
-                  </Box>
                   </ScrollView>
                 </TouchableOpacity>
               )}
             />
           </Box>
-          <Spacer/>
+          <Spacer />
         </>
       )}
     />

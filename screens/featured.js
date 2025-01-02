@@ -87,7 +87,7 @@ const FeaturedCategory = () => {
                 <Box
                   backgroundColor={"white"}
                   borderRadius={10}
-                  width="190"
+                  width="180"
                   height="230"
                 >
                   <VStack space={2} alignItems="center">
@@ -101,10 +101,8 @@ const FeaturedCategory = () => {
                       resizeMode="cover"
                     />
                     <Center>
-                      <Text textAlign={"center"}>{item.detailBarang}</Text>
-                      <Heading textAlign={"center"} mb="2" mx="3" size="sm">
-                        {item.name}
-                      </Heading>
+                    <Text textAlign={"center"} bold >{item.name}</Text>
+                      <Text textAlign={"center"} fontSize={10}>{item.detailBarang}</Text>
                       <Text bold italic underline>
                         Start from Rp.{item.price24h}
                       </Text>
