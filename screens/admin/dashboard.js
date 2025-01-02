@@ -3,10 +3,11 @@ import { Box, VStack, HStack, Button, FlatList, Text, IconButton, Icon, Image } 
 import { MaterialIcons } from "@expo/vector-icons";
 import { supabase } from "../../src/supabase"; // Impor client Supabase (tetap ada)
 import { database } from "../../firebase"; // Impor Firebase Database
-import { ref, onValue, remove  } from "firebase/database"; // Fungsi untuk Realtime Database
+import { ref, onValue, remove } from "firebase/database"; // Fungsi untuk Realtime Database
 
 const Dashboard = ({ navigation }) => {
     const [cameraItems, setCameraItems] = useState([]);
+    const [paketItems, setPaketItems] = useState([]);
 
     useEffect(() => {
         // Ambil data dari Firebase Realtime Database
@@ -27,7 +28,26 @@ const Dashboard = ({ navigation }) => {
             });
         };
 
+        // Ambil data dari Firebase Realtime Database untuk 'paket'
+        const fetchDataPaket = () => {
+            const paketRef = ref(database, "paket"); // Path 'paket' di Realtime Database
+            onValue(paketRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    // Format data menjadi array
+                    const formattedData = Object.keys(data).map((key) => ({
+                        id: key,
+                        ...data[key],
+                    }));
+                    setPaketItems(formattedData);
+                } else {
+                    setPaketItems([]); // Jika tidak ada data
+                }
+            });
+        };
+
         fetchData();
+        fetchDataPaket();
     }, []);
 
     const handleDelete = async (id) => {
@@ -54,9 +74,9 @@ const Dashboard = ({ navigation }) => {
                 mb="4"
                 bg="green.800"
                 _text={{ color: "white", fontWeight: "bold" }}
-                onPress={() => navigation.navigate("CameraBucket")}
+                onPress={() => navigation.navigate("AddPaket")}
             >
-                Camera Bucket
+                Add Paket
             </Button>
             <FlatList
                 data={cameraItems}
@@ -94,6 +114,49 @@ const Dashboard = ({ navigation }) => {
                             <IconButton
                                 icon={<Icon as={MaterialIcons} name="edit" color="violet.800" />}
                                 onPress={() => navigation.navigate("EditItem", { item })}
+                            />
+                            <IconButton
+                                icon={<Icon as={MaterialIcons} name="delete" color="red.500" />}
+                                onPress={() => handleDelete(item.id)}
+                            />
+                        </HStack>
+                    </Box>
+                )}
+            />
+            <FlatList
+                data={paketItems}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => (
+                    <Box
+                        borderBottomWidth="1"
+                        borderColor="coolGray.200"
+                        p="4"
+                        rounded="md"
+                        bg="white"
+                        mb="4"
+                    >
+                        <HStack space={4} alignItems="center">
+                            <VStack flex={1} space={2}>
+                                <Text fontWeight="bold" fontSize="lg">
+                                    {item.name}
+                                </Text>
+                                <Text color="gray.500">{item.detailBarang}</Text>
+                                <Text color="gray.600">Price 1 Hari: {parseInt(item.price24h).toLocaleString()}</Text>
+                            </VStack>
+
+                            <Image
+                                source={{ uri: item.imageUrl }}
+                                alt={item.name}
+                                size="xl"
+                                borderRadius="md"
+                                w="40%"
+                            />
+                        </HStack>
+
+                        <HStack justifyContent="space-between" mt="2">
+                            <IconButton
+                                icon={<Icon as={MaterialIcons} name="edit" color="violet.800" />}
+                                onPress={() => navigation.navigate("EditPaket", { item })}
                             />
                             <IconButton
                                 icon={<Icon as={MaterialIcons} name="delete" color="red.500" />}

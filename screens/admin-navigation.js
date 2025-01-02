@@ -8,6 +8,8 @@ import AddItem from "./admin/addItem";
 import AddCamera from "./admin/addCamera";
 import CameraBucket from "./admin/cameraBucket.js";
 import EditItem from "./admin/editItem";
+import AddPaket from "./admin/addPaket.js";
+import EditPaket from "./admin/editPaket.js";
 import { auth } from "../firebase"; // Pastikan auth sudah diinisialisasi dengan Firebase
 
 const Stack = createNativeStackNavigator();
@@ -65,6 +67,16 @@ const AdminNavigation = () => {
                 name="EditItem"
                 component={EditItem}
                 options={{ title: "Edit Camera" }}
+            />
+            <Stack.Screen
+                name="AddPaket"
+                component={AddPaket}
+                options={{ title: "Add Paket" }}
+            />
+            <Stack.Screen
+                name="EditPaket"
+                component={EditPaket}
+                options={{ title: "Edit Paket" }}
             />
         </Stack.Navigator>
     );
