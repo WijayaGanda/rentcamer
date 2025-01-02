@@ -80,10 +80,10 @@ const Home = () => {
                   <ScrollView>
                   <Box padding={2}>
                     <Box backgroundColor={"white"} borderRadius={10} width="240px" height="400px">
-                      <Image mb={6} borderTopRadius={10} source={require("../assets/camera.jpeg")} alt="camera" width="240px" height="200px" resizeMode="cover" />
+                      <Image mb={6} borderTopRadius={10} source={item.image} alt="camera" width="240px" height="200px" resizeMode="cover" />
                       <Center>
                         <Heading>{item.name}</Heading>
-                        <Text textAlign={"justify"}>{item.content}</Text>
+                        <Text textAlign={"justify"}>{item.brand}</Text>
                       </Center>
                     </Box>
                   </Box>
