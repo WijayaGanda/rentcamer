@@ -42,15 +42,24 @@ const Equipment = () => {
         ListHeaderComponent={() => (
           <>
             <Center>
-              <Box mt={4} px={5} shadow="" backgroundColor={"black"} borderRadius="10" width="90%">
-                <Center>
-                  <Image
-                    source={require("../assets/camera.jpeg")}
-                    alt="Featured"
-                    resizeMode="contain"
-                  />
-                </Center>
-              </Box>
+              <Box
+                              mt={4}
+                              px={5}
+                              shadow=""
+                              backgroundColor={"black"}
+                              borderRadius="10"
+                              width="90%"
+                              height="200px" // Set the desired height for the box
+                            >
+                              <Center>
+                                <Image
+                                  source={require("../assets/eos-r5_eos-r6_camera_shot_b5b2b9f3718644e09b6a886f884a1632.jpg")}
+                                  alt="Featured"
+                                  resizeMode="cover" // or "stretch"
+                                  style={{ width: "100%", height: "100%" }} // Ensure the image takes the full width and height of the box
+                                />
+                              </Center>
+                            </Box>
             </Center>
             <Box p={5}>
               <HStack justifyContent={"space-between"} alignItems={"center"}>
