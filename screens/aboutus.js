@@ -64,7 +64,7 @@ const AboutUs = () => {
             </HStack>
             <HStack space={4} alignItems="center">
               <Image
-                source={require("../assets/assets/vecteezy_3d-kid-character-laying-on-transparent-wall_34618171.png")} // Replace with actual image path
+                source={require("../assets/vecteezy_3d-kid-character-laying-on-transparent-wall_34618171.png")} // Replace with actual image path
                 alt="Team Member 2"
                 size="sm"
                 borderRadius={100}
@@ -76,7 +76,7 @@ const AboutUs = () => {
             </HStack>
             <HStack space={4} alignItems="center">
               <Image
-                source={require("../assets/assets/vecteezy_3d-kid-character-laying-on-transparent-wall_34339885.png")} // Replace with actual image path
+                source={require("../assets/vecteezy_3d-kid-character-laying-on-transparent-wall_34339885.png")} // Replace with actual image path
                 alt="Team Member 2"
                 size="sm"
                 borderRadius={100}
