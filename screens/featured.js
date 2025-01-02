@@ -16,7 +16,6 @@ import { featured } from "../datas"; // Import `featured` data
 import { database } from "../firebase";
 import { ref, onValue } from "firebase/database";
 
-
 const FeaturedCategory = () => {
   const navigation = useNavigation();
   const [items, setItems] = useState([]);
@@ -51,12 +50,14 @@ const FeaturedCategory = () => {
                 backgroundColor={"black"}
                 borderRadius="10"
                 width="90%"
+                height="200px" // Set the desired height for the box
               >
                 <Center>
                   <Image
-                    source={require("../assets/camera.jpeg")}
+                    source={require("../assets/image_home_second_1.jpg")}
                     alt="Featured"
-                    resizeMode="contain"
+                    resizeMode="cover" // or "stretch"
+                    style={{ width: "100%", height: "100%" }} // Ensure the image takes the full width and height of the box
                   />
                 </Center>
               </Box>
@@ -78,9 +79,7 @@ const FeaturedCategory = () => {
         renderItem={({ item }) => (
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() =>
-              navigation.navigate("Detail", { itemId: item.id })
-            }
+            onPress={() => navigation.navigate("Detail", { itemId: item.id })}
           >
             <Box padding={2} width="100%">
               <Center>
