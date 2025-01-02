@@ -12,7 +12,7 @@ const AboutUs = () => {
       <Center mt={4}>
             <Box px={50} mb={4} shadow="4" backgroundColor={"black"} borderRadius="10" width="90%">
               <Center>
-                <Image source={require("../assets/camera.jpeg")} alt="camera" resizeMode="contain" />
+                <Image source={require("../assets/assets/White-clapperboard-film-filming-props-elements-pictures-art_158080_wh1200.png")} alt="camera" resizeMode="contain" />
               </Center>
             </Box>
             
@@ -22,11 +22,14 @@ const AboutUs = () => {
            About Our Company
           </Text>
           <Text textAlign="justify">
-            {/* Welcome to our company! We specialize in providing top-notch equipment and services.
-            Our mission is to offer the highest quality products to help our customers achieve
-            their goals. With a team of experienced professionals, we’re dedicated to innovation,
-            excellence, and sustainability. */}
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras gravida, orci nec feugiat commodo, ipsum orci consequat nulla.
+            <Center>
+            PixRent 
+            "Your pixels, your story"
+            PixRent hadir sebagai ruang kreatif yang menghubungkan Anda dengan dunia visual tanpa batas. 
+            Dengan pilihan kamera, lensa, dan aksesori terbaik, kami membantu Anda mengabadikan setiap detail momen,
+            satu piksel indah pada satu waktu. Estetika, teknologi, dan kemudahan berpadu di PixRent, 
+            menjadikan setiap cerita Anda berharga. 🎥✨
+            </Center>
           </Text>
         </VStack>
 
@@ -36,10 +39,8 @@ const AboutUs = () => {
             Our Mission
           </Text>
           <Text textAlign="justify">
-            {/* We strive to make a positive impact by developing solutions that empower our customers
-            and benefit the world. Our goal is to set a high standard in our industry and to be a
-            trusted partner to all our clients. */}
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras gravida, orci nec feugiat commodo, ipsum orci consequat nulla.
+           Menjadi penyedia solusi fotografi terbaik yang menginspirasi kreativitas dan membantu setiap individu mengabadikan momen dengan cara yang indah,
+           mudah, dan inovatif.
           </Text>
         </Box>
 
@@ -51,8 +52,20 @@ const AboutUs = () => {
           <VStack space={4}>
             <HStack space={4} alignItems="center">
               <Image
-                source={require("../assets/camera.jpeg")} // Replace with actual image path
+                source={require("../assets/vecteezy_3d-kid-character-laying-on-transparent-wall_34918440.png")} // Replace with actual image path
                 alt="Team Member 1"
+                size="sm"
+                borderRadius={100}
+              />
+               <VStack>
+                <Text fontWeight="bold">Wijaya Ganda Prasetyo</Text>
+                <Text color="gray.500">Founder</Text>
+              </VStack>
+            </HStack>
+            <HStack space={4} alignItems="center">
+              <Image
+                source={require("../assets/assets/vecteezy_3d-kid-character-laying-on-transparent-wall_34618171.png")} // Replace with actual image path
+                alt="Team Member 2"
                 size="sm"
                 borderRadius={100}
               />
@@ -63,19 +76,7 @@ const AboutUs = () => {
             </HStack>
             <HStack space={4} alignItems="center">
               <Image
-                source={require("../assets/camera.jpeg")} // Replace with actual image path
-                alt="Team Member 2"
-                size="sm"
-                borderRadius={100}
-              />
-              <VStack>
-                <Text fontWeight="bold">Wijaya Ganda Prasetyo</Text>
-                <Text color="gray.500">Founder</Text>
-              </VStack>
-            </HStack>
-            <HStack space={4} alignItems="center">
-              <Image
-                source={require("../assets/camera.jpeg")} // Replace with actual image path
+                source={require("../assets/assets/vecteezy_3d-kid-character-laying-on-transparent-wall_34339885.png")} // Replace with actual image path
                 alt="Team Member 2"
                 size="sm"
                 borderRadius={100}
