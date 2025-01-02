@@ -14,6 +14,7 @@ import DetailItem from "./screens/detail-item";
 import Booking from "./screens/booking";
 import AdminNavigation from "./screens/admin-navigation";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import OrderPaket from "./screens/orderpaket";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -87,6 +88,7 @@ const App = () => {
           <Stack.Screen name="DetailItem" component={DetailItem} options={noHead} />
           <Stack.Screen name="Booking" component={Booking} options={noHead} />
           <Stack.Screen name="AdminDashboard" component={AdminNavigation} options={noHead} />
+          <Stack.Screen name="OrderPaket" component={OrderPaket} options={noHead} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

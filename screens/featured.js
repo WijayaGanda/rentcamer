@@ -1,92 +1,123 @@
-import React from "react";
-import { Box, Center, Text, Image, VStack, HStack, FlatList, Heading } from "native-base";
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Center,
+  Text,
+  Image,
+  VStack,
+  HStack,
+  FlatList,
+  Heading,
+} from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native";
 import { Header } from "../components";
 import { featured } from "../datas"; // Import `featured` data
+import { database } from "../firebase";
+import { ref, onValue } from "firebase/database";
+
 
 const FeaturedCategory = () => {
   const navigation = useNavigation();
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const itemsRef = ref(database, "paket");
+    const unsubscribe = onValue(itemsRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const formattedData = Object.keys(data).map((key) => ({
+          id: key,
+          ...data[key],
+        }));
+        setItems(formattedData);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
-    <FlatList
-      ListHeaderComponent={() => (
-        <>
-          <Header title={"Featured"} />
-          <Center>
-            <Box mt={4} px={5} shadow="" backgroundColor={"black"} borderRadius="10" width="90%">
+    <Box flex={1} bg="">
+      <Header title={"Featured"} />
+      <FlatList
+        ListHeaderComponent={() => (
+          <>
+            <Center>
+              <Box
+                mt={4}
+                px={5}
+                shadow=""
+                backgroundColor={"black"}
+                borderRadius="10"
+                width="90%"
+              >
+                <Center>
+                  <Image
+                    source={require("../assets/camera.jpeg")}
+                    alt="Featured"
+                    resizeMode="contain"
+                  />
+                </Center>
+              </Box>
+            </Center>
+            <Box p={5}>
+              <HStack justifyContent={"space-between"} alignItems={"center"}>
+                <Text fontWeight={"bold"} fontSize={16}>
+                  Select Brands
+                </Text>
+                <Text fontSize={16} color={"blue.600"}>
+                  All
+                </Text>
+              </HStack>
+            </Box>
+          </>
+        )}
+        data={items}
+        numColumns={2}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() =>
+              navigation.navigate("Detail", { itemId: item.id })
+            }
+          >
+            <Box padding={2} width="100%">
               <Center>
-                <Image
-                  source={require("../assets/camera.jpeg")}
-                  alt="Featured"
-                  resizeMode="contain"
-                />
+                <Box
+                  backgroundColor={"white"}
+                  borderRadius={10}
+                  width="190"
+                  height="230"
+                >
+                  <VStack space={2} alignItems="center">
+                    <Image
+                      my={3}
+                      borderTopRadius={10}
+                      source={{ uri: item.imageUrl }}
+                      alt={item.name}
+                      width="150px"
+                      height="100px"
+                      resizeMode="cover"
+                    />
+                    <Center>
+                      <Text textAlign={"center"}>{item.detailBarang}</Text>
+                      <Heading textAlign={"center"} mb="2" mx="3" size="sm">
+                        {item.name}
+                      </Heading>
+                      <Text bold italic underline>
+                        Start from Rp.{item.price24h}
+                      </Text>
+                    </Center>
+                  </VStack>
+                </Box>
               </Center>
             </Box>
-          </Center>
-
-          {/* Featured Categories Section */}
-          <Box p={5}>
-            <HStack justifyContent={"space-between"} alignItems={"center"} mb={3}>
-              <Text fontWeight={"bold"} fontSize={16}>Featured Categories</Text>
-            </HStack>
-
-            {/* Grid Layout for Featured Categories */}
-            <FlatList
-              data={featured} // Use `featured` data
-              numColumns={2} // Set 2 columns per row
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  activeOpacity={0.4}
-                  onPress={() => navigation.navigate("Detail", { item: item })}
-                  style={{ flex: 1, margin: 8 }}
-                >
-                  <Box
-                    backgroundColor={"white"}
-                    borderRadius={10}
-                    shadow="2"
-                    width="100%"
-                    height="220px"
-                    flex={1} // Allow flexible width
-                    padding={3} // Add padding for better spacing
-                  >
-                    <Box>
-                      <Image
-                        mb={2}
-                        borderTopRadius={10}
-                        source={item.image} // Use dynamic image from `item`
-                        alt={item.name}
-                        width="100%"
-                        height="100px"
-                        resizeMode="cover"
-                      />
-                      <Center>
-                        <Heading size="sm" numberOfLines={1} isTruncated>
-                          {item.name}
-                        </Heading>
-                        <Text
-                          textAlign={"center"}
-                          fontSize="sm"
-                          numberOfLines={2}
-                          isTruncated // Ensure text is truncated with "..."
-                        >
-                          {item.description} {/* Use `description` from `featured` */}
-                        </Text>
-                      </Center>
-                    </Box>
-                  </Box>
-                </TouchableOpacity>
-              )}
-              showsVerticalScrollIndicator={false}
-              columnWrapperStyle={{
-                justifyContent: "space-between", // Space between columns
-              }}
-            />
-          </Box>
-        </>
-      )}
-    />
+          </TouchableOpacity>
+        )}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    </Box>
   );
 };
 
