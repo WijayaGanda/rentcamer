@@ -14,8 +14,6 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { Header } from "../components";
 import { auth, database } from "../firebase";
 import { ref, onValue, push, set } from "firebase/database";
-import * as FileSystem from 'expo-file-system'; // Import expo-file-system
-import * as MediaLibrary from 'expo-media-library'; // Import expo-media-library
 
 const Booking = ({ route, navigation }) => {
     const { itemId } = route.params;
