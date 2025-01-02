@@ -82,19 +82,6 @@ const EditItem = ({ route, navigation }) => {
                     <FormControl.Label>Image URL</FormControl.Label>
                     <Input value={imageUrl} onChangeText={setImageUrl}/>
                 </FormControl>
-
-                {/* Tampilkan gambar jika URL tersedia */}
-                {imageUrl ? (
-                        <Image
-                            source={{ uri: imageUrl }}
-                            alt="Camera Image"
-                            size="xl"
-                            rounded="md"
-                            mt="4"
-                        />
-                    ) : null}
-
-
                 <Button onPress={handleSubmit} mt="4" bg="violet.800" _text={{ color: "white" }}>
                     Save Changes
                 </Button>
