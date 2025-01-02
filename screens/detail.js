@@ -1,48 +1,81 @@
-import { Box, Center, Heading, Image, Text, VStack } from "native-base";
+import React from "react";
+import { ScrollView } from "react-native";
+import {
+    Box,
+    Text,
+    Image,
+    Button,
+    VStack,
+    Divider,
+} from "native-base";
 import { Header } from "../components";
+import { featured, datas } from "../datas"; // Impor datas.js
 
-const Detail = () => {
-  return (
-    <>
-      <Header title={"Detail Package"} withBack={true} />
-      <Center bg={"gray.100"}flex={1} justifyContent={"center"}>
-        <VStack space={1}>
-        <Center>
-          <Box bg={"black"} width="300px" height="200px" borderRadius={10}>
-            <Image
-              source={require("../assets/camera.jpeg")}
-              alt="camera"
-              resizeMode="cover"
-              borderRadius={10}
-            />
-          </Box>
-          </Center>
-          <Center>
-          <Heading>Cinema Set</Heading>
-          <Text>By Sony</Text>
-          </Center>
+const Detail = ({ route, navigation }) => {
+    const { itemId } = route.params;
+    // Cari item di featured
+    const item = 
+    datas.find((data) => data.id === itemId);
+    const barang =
+    featured.find((data) => data.id === itemId);
 
-          <Box bg={"yellow.100"} borderRadius={10} padding={5}>
-            <Heading size={"md"}>Product Info:</Heading>
-            <Text>- Sony A7RIII</Text>
-            <Text>- 24-35mm Lens</Text>
-            <Text>- ND Filter (8 Rings)</Text>
-            <Text>- Dji Ronin S2</Text>
-            <Text>- Kingjoy Tripod</Text>
-            <Text>- Godox LD-60</Text>
-          </Box>
+    return (
+        <Box flex={1} bg="#F9F9F9">
+            <Header title={"Detail Paket"} withBack={true} />
+            <ScrollView>
+                <Box safeArea p="4" bg="#F9F9F9">
+                    <Box alignItems="center">
+                        <Image
+                            source={featured.image}
+                            alt="Item Image"
+                            size="2xl"
+                            borderRadius="lg"
+                        />
+                    </Box>
 
-          <Box bg={"red.100"} borderRadius={10} padding={5}>
-            <Heading size={"md"}>Include:</Heading>
-            <Text>- Stab Bag </Text>
-            <Text>- Camera Bag </Text>
-            <Text>- Sony battery x2</Text>
-            <Text>- charger</Text>
-          </Box>
-          
-        </VStack>
-      </Center>
-    </>
-  );
+                    <VStack space={1} pl="4">
+                        <Text fontSize="xl" fontWeight="bold">
+                            {featured.name}
+                        </Text>
+
+                        <Divider my="2" />
+
+                        <Text fontSize="lg" fontWeight="bold">
+                            Description:
+                        </Text>
+                        <VStack space={1} pl="4">             
+                        <Text fontSize="md"> {featured.description} </Text>
+                        </VStack>
+
+                        <Divider my="2" />
+
+                        <Text fontSize="lg" fontWeight="bold">
+                            Include:
+                        </Text>
+                        <VStack space={1} pl="4">
+                            <Text fontSize="md">• Unit</Text>
+                            <Text fontSize="md">• Battery x2</Text>
+                            <Text fontSize="md">• Desktop Charger</Text>
+                            <Text fontSize="md">• Memory Micro SD 64GB Extreme</Text>
+                            <Text fontSize="md">• Mini Tripod Multifunction Monopod</Text>
+                            <Text fontSize="md">• Case/Bag</Text>
+                        </VStack>
+
+                        <Button
+                            mt="6"
+                            bg="violet.800"
+                            _text={{ color: "white", fontWeight: "bold" }}
+                            onPress={() =>
+                                navigation.navigate("Booking", { itemId: item.id })
+                            }
+                        >
+                            Checkout
+                        </Button>
+                    </VStack>
+                </Box>
+            </ScrollView>
+        </Box>
+    );
 };
+
 export default Detail;

@@ -305,7 +305,7 @@ const featured = [
     {
         id: 1,
         category_id: 1,
-        name: "Travelling" ,
+        name : "Travelling" ,
         description : "Kamera lensa foto, flash & continuous lighting support, studio equipment, background, modifier dan lainnya ada disini",
         image : require("./assets/CanonM50.webp"),
         content : content,
@@ -314,8 +314,8 @@ const featured = [
         id: 2,
         category_id: 2,
         name: "Multimedia" ,
-        description : "Kamera lensa foto, flash & continuous lighting support, studio equipment, background, modifier dan lainnya ada disini",
-        image : require("./assets/SonyA6700.webp"),
+        description : " flash & continuous lighting support, studio equipment, background, modifier dan lainnya ada disini",
+        image : require ("./assets/SonyA6700.webp"),
         content : content,
     },
     {

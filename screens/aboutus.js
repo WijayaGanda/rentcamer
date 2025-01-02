@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Center, Text, Image, VStack, HStack, ScrollView } from "native-base";
+import { Box, Center, Text, Image, VStack, HStack, ScrollView, Heading } from "native-base";
 import { Header } from "../components";
 import { useNavigation } from "@react-navigation/native";
 
@@ -7,11 +7,10 @@ const AboutUs = () => {
   const navigation = useNavigation();
 
   return (
-    <ScrollView flex={1} backgroundColor="white">
+    <ScrollView flex={1} backgroundColor="">
       <Header title="About Us" />
-      <Center mt={4} px={3}>
-          
-            <Box mt={4} px={50} mb={4} shadow="4" backgroundColor={"black"} borderRadius="20" width="90%">
+      <Center mt={4}>
+            <Box px={50} mb={4} shadow="4" backgroundColor={"black"} borderRadius="10" width="90%">
               <Center>
                 <Image source={require("../assets/camera.jpeg")} alt="camera" resizeMode="contain" />
               </Center>
@@ -19,8 +18,8 @@ const AboutUs = () => {
             
         {/* About Us Section */}
         <VStack space={4} alignItems="justify" w="90%">
-          <Text fontWeight="bold" fontSize="lg" textAlign="center">
-            About Our Company
+          <Text fontWeight="bold" fontSize={20} textAlign="center">
+           About Our Company
           </Text>
           <Text textAlign="justify">
             {/* Welcome to our company! We specialize in providing top-notch equipment and services.
@@ -33,7 +32,7 @@ const AboutUs = () => {
 
         {/* Mission Statement Section */}
         <Box mt={6} w="90%">
-          <Text fontWeight="bold" fontSize="lg" textAlign="center" mb={2}>
+          <Text fontWeight="bold" fontSize={20} textAlign="center" mb={2}>
             Our Mission
           </Text>
           <Text textAlign="justify">
@@ -70,7 +69,7 @@ const AboutUs = () => {
                 borderRadius={100}
               />
               <VStack>
-                <Text fontWeight="bold">Wijaya Ganda</Text>
+                <Text fontWeight="bold">Wijaya Ganda Prasetyo</Text>
                 <Text color="gray.500">Founder</Text>
               </VStack>
             </HStack>
@@ -82,20 +81,8 @@ const AboutUs = () => {
                 borderRadius={100}
               />
               <VStack>
-                <Text fontWeight="bold">Athalla</Text>
-                <Text color="gray.500">Chief Technology Officer</Text>
-              </VStack>
-            </HStack>
-            <HStack space={4} alignItems="center">
-              <Image
-                source={require("../assets/camera.jpeg")} // Replace with actual image path
-                alt="Team Member 2"
-                size="sm"
-                borderRadius={100}
-              />
-              <VStack>
-                <Text fontWeight="bold">Jane Smith</Text>
-                <Text color="gray.500">Chief Administrator</Text>
+                <Text fontWeight="bold">Athalla Naufal Zuhdi</Text>
+                <Text color="gray.500">Founder</Text>
               </VStack>
             </HStack>
           </VStack>

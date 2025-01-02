@@ -28,7 +28,7 @@ const FeaturedCategory = () => {
           {/* Featured Categories Section */}
           <Box p={5}>
             <HStack justifyContent={"space-between"} alignItems={"center"} mb={3}>
-              <Text fontWeight={"bold"} fontSize={18}>Featured Categories</Text>
+              <Text fontWeight={"bold"} fontSize={16}>Featured Categories</Text>
             </HStack>
 
             {/* Grid Layout for Featured Categories */}
