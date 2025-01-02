@@ -12,7 +12,7 @@ const AboutUs = () => {
       <Center mt={4}>
             <Box px={50} mb={4} shadow="4" backgroundColor={"black"} borderRadius="10" width="90%">
               <Center>
-                <Image source={require("../assets/assets/White-clapperboard-film-filming-props-elements-pictures-art_158080_wh1200.png")} alt="camera" resizeMode="contain" />
+                <Image source={require("../assets/White-clapperboard-film-filming-props-elements-pictures-art_158080_wh1200.png")} alt="camera" resizeMode="contain" />
               </Center>
             </Box>
             
