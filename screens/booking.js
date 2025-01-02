@@ -15,7 +15,6 @@ import { Header } from "../components";
 import { auth, database } from "../firebase";
 import { ref, onValue, push, set } from "firebase/database";
 import * as FileSystem from 'expo-file-system'; // Import expo-file-system
-import { PDFDocument, rgb } from 'pdf-lib'; // Assuming pdf-lib is used for PDF generation
 import * as MediaLibrary from 'expo-media-library'; // Import expo-media-library
 
 const Booking = ({ route, navigation }) => {
