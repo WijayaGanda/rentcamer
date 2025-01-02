@@ -1,32 +1,72 @@
-import React, { useState } from "react";
-import { Box, VStack, FormControl, Input, Button, Text, Image } from "native-base";
+import React, { useState, useEffect } from "react";
+import { Box, VStack, FormControl, Input, Button, Text, ScrollView } from "native-base";
+import { database } from "../../firebase"; // Impor konfigurasi Firebase
+import { ref, get, update } from "firebase/database"; // Impor fungsi Firebase Realtime Database
 
 const EditItem = ({ route, navigation }) => {
-    const { item } = route.params;
+    const { item } = route.params; // Ambil item ID dari parameter navigasi
 
-    const [name, setName] = useState(item.name);
-    const [brand, setBrand] = useState(item.brand);
-    const [price6h, setPrice6h] = useState(item.price_6h);
-    const [price12h, setPrice12h] = useState(item.price_12h);
-    const [price24h, setPrice24h] = useState(item.price_24h);
-    const [imageUrl, setImageUrl] = useState(item.imageUrl || ""); // Menambahkan state untuk gambar
+    // State untuk data item
+    const [name, setName] = useState("");
+    const [brand, setBrand] = useState("");
+    const [price6h, setPrice6h] = useState("");
+    const [price12h, setPrice12h] = useState("");
+    const [price24h, setPrice24h] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
 
-    const handleSubmit = () => {
-        // Logika untuk menyimpan perubahan data
-        console.log({
-            id: item.id,
-            name,
-            brand,
-            price6h,
-            price12h,
-            price24h,
-            imageUrl, // Menyertakan URL gambar dalam data yang dikirim
-        });
+    // Ambil data dari Firebase berdasarkan ID item
+    useEffect(() => {
+        const fetchItemData = async () => {
+            try {
+                const itemRef = ref(database, `items/${item.id}`); // Path ke data item
+                const snapshot = await get(itemRef);
 
-        navigation.goBack(); // Kembali ke halaman sebelumnya
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    setName(data.name || "");
+                    setBrand(data.brand || "");
+                    setPrice6h(data.price6h || "");
+                    setPrice12h(data.price12h || "");
+                    setPrice24h(data.price24h || "");
+                    setImageUrl(data.imageUrl || "");
+                } else {
+                    console.log("Item data not found!");
+                }
+            } catch (error) {
+                console.error("Error fetching item data:", error);
+            }
+        };
+
+        fetchItemData();
+    }, [item.id]); // Jalankan hanya saat item.id berubah
+
+    const handleSubmit = async () => {
+        try {
+            const itemRef = ref(database, `items/${item.id}`); // Path ke data item
+
+            // Data yang akan diperbarui
+            const updatedData = {
+                name,
+                brand,
+                price6h,
+                price12h,
+                price24h,
+                imageUrl,
+            };
+
+            // Update data di Firebase
+            await update(itemRef, updatedData);
+            console.log("Data successfully updated:", updatedData);
+
+            // Kembali ke halaman sebelumnya
+            navigation.goBack();
+        } catch (error) {
+            console.error("Error updating item data:", error);
+        }
     };
 
     return (
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
         <Box safeArea p="4" flex={1} bg="#F9F9F9">
             <Text fontSize="2xl" fontWeight="bold" mb="4">
                 Edit Camera
@@ -52,29 +92,17 @@ const EditItem = ({ route, navigation }) => {
                     <FormControl.Label>Price (24h)</FormControl.Label>
                     <Input value={price24h} onChangeText={setPrice24h} keyboardType="numeric" />
                 </FormControl>
-
-                {/* Input URL gambar */}
                 <FormControl>
                     <FormControl.Label>Image URL</FormControl.Label>
-                    <Input value={imageUrl} onChangeText={setImageUrl} />
+                    <Input value={imageUrl} onChangeText={setImageUrl}/>
                 </FormControl>
-
-                {/* Tampilkan gambar jika URL tersedia */}
-                {imageUrl ? (
-                    <Image
-                        source={{ uri: imageUrl }}
-                        alt="Camera Image"
-                        size="xl"
-                        rounded="md"
-                        mt="4"
-                    />
-                ) : null}
 
                 <Button onPress={handleSubmit} mt="4" bg="violet.800" _text={{ color: "white" }}>
                     Save Changes
                 </Button>
             </VStack>
         </Box>
+        </ScrollView>
     );
 };
 

@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, initializeAuth, getReactNativePersistence } from "firebase/auth";
-import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
+import { getDatabase } from "firebase/database"; // Import modul Realtime Database
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Konfigurasi Firebase
 const firebaseConfig = {
@@ -10,7 +11,7 @@ const firebaseConfig = {
   projectId: "rentcamera-62560",
   storageBucket: "rentcamera-62560.firebasestorage.app",
   messagingSenderId: "406709257951",
-  appId: "1:406709257951:web:9da736bac78eb6318dcb6a"
+  appId: "1:406709257951:web:9da736bac78eb6318dcb6a",
 };
 
 // Inisialisasi Firebase
@@ -21,4 +22,7 @@ const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(AsyncStorage),
 });
 
-export { auth };
+// Inisialisasi Realtime Database
+const database = getDatabase(app);
+
+export { auth, database };

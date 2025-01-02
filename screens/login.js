@@ -74,9 +74,6 @@ const Login = ({ navigation }) => {
             >
               Login
             </Button>
-            <Text textAlign={"center"} color={"blue.800"} fontWeight={"bold"}>
-              Forgot Password?
-            </Text>
             <Spacer />
             <Pressable onPress={() => navigation.navigate("Register")}>
               <Text textAlign={"center"} color={"blue.800"} fontWeight={"bold"}>
