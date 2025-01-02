@@ -64,7 +64,7 @@ const FeaturedCategory = () => {
             <Box p={5}>
               <HStack justifyContent={"space-between"} alignItems={"center"}>
                 <Text fontWeight={"bold"} fontSize={16}>
-                  Select Brands
+                  Select Featured
                 </Text>
                 <Text fontSize={16} color={"blue.600"}>
                   All
