@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Center, Text, Image, VStack, HStack, ScrollView, Heading } from "native-base";
+import { Box, Center, Text, Image, VStack, HStack, ScrollView, Heading, Spacer } from "native-base";
 import { Header } from "../components";
 import { useNavigation } from "@react-navigation/native";
 
@@ -10,9 +10,9 @@ const AboutUs = () => {
     <ScrollView flex={1} backgroundColor="">
       <Header title="About Us" />
       <Center mt={4}>
-            <Box px={50} mb={4} shadow="4" backgroundColor={"black"} borderRadius="10" width="90%">
+            <Box mb={4} shadow="4" backgroundColor={"black"} borderRadius="10" width="90%">
               <Center>
-                <Image source={require("../assets/White-clapperboard-film-filming-props-elements-pictures-art_158080_wh1200.png")} alt="camera" resizeMode="contain" />
+                <Image source={require("../assets/thumbnail-1.webp")} alt="camera" resizeMode="stretch"  height="220px" borderRadius="9"/>
               </Center>
             </Box>
             
@@ -23,12 +23,11 @@ const AboutUs = () => {
           </Text>
           <Text textAlign="justify">
             <Center>
-            PixRent 
-            "Your pixels, your story"
-            PixRent hadir sebagai ruang kreatif yang menghubungkan Anda dengan dunia visual tanpa batas. 
+            <Center>PixRent, "Your Pixels, Your Story".</Center>
+            <Spacer>PixRent hadir sebagai ruang kreatif yang menghubungkan Anda dengan dunia visual tanpa batas. 
             Dengan pilihan kamera, lensa, dan aksesori terbaik, kami membantu Anda mengabadikan setiap detail momen,
             satu piksel indah pada satu waktu. Estetika, teknologi, dan kemudahan berpadu di PixRent, 
-            menjadikan setiap cerita Anda berharga. 🎥✨
+            menjadikan setiap cerita Anda berharga. 🎥✨ </Spacer>
             </Center>
           </Text>
         </VStack>
@@ -46,7 +45,7 @@ const AboutUs = () => {
 
         {/* Team Section */}
         <Box mt={6} w="90%">
-          <Text fontWeight="bold" fontSize="lg" mb={2}>
+          <Text fontWeight="bold" fontSize="lg" mb={2} textAlign="center">
             Meet Our Team
           </Text>
           <VStack space={4}>
