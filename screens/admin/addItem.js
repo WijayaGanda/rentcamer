@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Box, VStack, FormControl, Input, Button, Text, Image, ScrollView } from "native-base";
+import { database } from "../../firebase"; // Pastikan path ini sesuai dengan file firebase.js
+import { ref, push } from "firebase/database";
 
 const AddItem = ({ navigation }) => {
     const [name, setName] = useState("");
@@ -9,18 +11,25 @@ const AddItem = ({ navigation }) => {
     const [price24h, setPrice24h] = useState("");
     const [imageUrl, setImageUrl] = useState("");
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         // Logika untuk menambahkan item baru
-        console.log({
+        const newItem = {
             name,
             brand,
             price6h,
             price12h,
             price24h,
-            imageUrl
-        });
-
-        navigation.goBack(); // Kembali ke halaman sebelumnya
+            imageUrl,
+        };
+        try {
+            // Buat referensi ke path "items" di Realtime Database
+            const itemsRef = ref(database, "items");
+            await push(itemsRef, newItem); // Tambahkan data ke path "items"
+            console.log("Data berhasil disimpan:", newItem);
+            navigation.goBack(); // Kembali ke halaman sebelumnya
+          } catch (error) {
+            console.error("Gagal menyimpan data:", error);
+          }
     };
 
     return (
